@@ -1,0 +1,117 @@
+<% layout('/layouts/boilerplate') -%>
+<!-- 
+ <script> 
+  const mapToken = "<%= process.env.MAP_TOKEN %>";    // Map(Token)
+  const listing = "<%- JSON.stringify(listing) %>";  // Map(coordinatss)
+</script>  -->
+
+
+  <div class="row mt-3">
+    <div class="col-8 offset-2">
+    <h3><%= listing.title %></h3>
+      
+    </div>
+    <div class="card col-4 offset-2 show-card listing-card mb-4">
+      <!-- <img src="<%= listing.image  %>" class="card-img-top show-img" style="height: 20rem;" alt="Image" > -->
+      <img src="<%= listing.image.url  %>" class="card-img-top show-img" style="height: 20rem;" alt="Image" >
+      <div class="card-body mb-2"> <br>
+      <p class="card-text"><b>Owned by : <%= listing.owner.username %></b></p>
+      <p class="card-text"> <%= listing.description %> </p>
+      <p class="card-text">   &#8377; <%= listing.price.toLocaleString("en-IN") %> </p>
+      <p class="card-text"> <i class="fa-solid fa-location-dot"></i> <%= listing.location %> </p>
+      <p class="card-text"> <i class="fa-solid fa-globe"></i> <%= listing.country %> </p>
+      </div>
+    </div>
+ 
+    <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
+    <div class="btns ">
+      <a  id="edit-btn" href="/listings/<%= listing._id %>/edit" class="btn btn-success col-1 offset-2">Edit</a>
+
+      <form  method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
+        <button class="btn btn-danger offset-5">Delete</button><br><br>
+      </form>  
+    </div>
+  </div>
+  <% } %>
+
+
+
+ 
+<!----------- Create Reviews ------------------>
+
+  
+    <div  class="col-8 offset-2 mb-3">
+      <% if(currUser) { %>
+        <hr>
+      <h4>Leave a Review</h4>
+      <form action="/listings/<%= listing.id %>/reviews" method="post" novalidate  class="needs-validation">
+
+        <div class="mb-3 mt-3">
+        <label for="rating" class="mb-2">Rating</label> 
+        <fieldset class="starability-slot">
+          <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+          <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+          <label for="first-rate1" title="Terrible">1 star</label>
+          <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+          <label for="first-rate2" title="Not good">2 stars</label>
+          <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+          <label for="first-rate3" title="Average">3 stars</label>
+          <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+          <label for="first-rate4" title="Very good">4 stars</label>
+          <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+          <label for="first-rate5" title="Amazing">5 stars</label>
+        </fieldset>
+        </div>
+
+        <div class="mb-3 mt-3">
+          <label for="comment"  class="form-label">Comment</label>
+          <textarea name="review[comment]" id="comment" 
+          placeholder="Comment this review..."
+          rows="5" cols="30" 
+          class="form-control" 
+         required
+          ></textarea>
+          <div class="invalid-feedback">Please submit some comments for review</div>
+          
+        </div>
+        <button class="btn btn-dark  add-btn mb-3">Submit</button>
+      </form> 
+      <% } %>
+
+<% if(listing.reviews.length > 0) { %>
+    <div class="row">
+      <h4><b> All Reviews </b></h4>
+      <% for(review of listing.reviews){  %>
+     <div class="card col-5 ms-3 mb-4 " style="width: 18rem;">
+      <div class="card-body">
+      <b><p class="card-title"> @<%= review.author.username %> </p></b> 
+      <p class="starability-result card-text " data-rating="<%= review.rating  %>"></p>  
+      <p class="card-text mb-3 "> <%= review.comment %></p>
+
+      </div>
+      <form method="post" class="mb-3" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+        <button class="btn btn-sm btn-danger ">Delete</button>
+      </form>
+    </div>
+    <% } %> 
+  </div>
+<% } %> 
+
+
+<!------------- Mapbox Map(display)---------------- -->
+ <!-- <div class="col-8 offset-2 mb-3">
+
+  </div>
+    <h3>Where you'll be</h3>
+    <div id="map"></div>
+  </div>
+
+  <script src="/JS/map.js"></script>      -->
+
+
+
+
+    <h3>Where you'll be</h3>
+    <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5537965.8766015405!2d73.4696253372431!3d21.37858792026101!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd6099355fd39f5%3A0xfcd7f3a44fc36322!2sBetul%2C%20Madhya%20Pradesh%20460001!5e0!3m2!1sen!2sin!4v1732892366183!5m2!1sen!2sin"
+     width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
