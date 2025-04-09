@@ -1,5 +1,13 @@
   # My Airbnb Project
 This is My Airbnb Project!
+This project is a full-stack clone of the popular platform Airbnb.
+The main purpose of this project is to practice and learn how real-world websites work from backend to frontend.
+In this project, users can create an account, log in, and list their properties for rent.
+Other users can search for different types of properties based on location, category, and availability.
+They can view detailed information about each property like price, description, and amenities.
+
+It is a complete project that looks and feels like a real Airbnb website.
+Working on this project improved my skills in frontend, backend, database management, and responsive web design.
 
 🚀 How to Run this Project
 1. Clone the Project :-
