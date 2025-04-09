@@ -1,4 +1,4 @@
-# My Airbnb Project
+  # My Airbnb Project
 This is My Airbnb Project!
 
 🚀 How to Run this Project
@@ -33,8 +33,9 @@ Express Session (For session management),
 Connect-Flash (For flash messages),
 Bcrypt (For password hashing).
 
-![Uploading Screenshot (1503).png…]()
 
+
+<img src="![Uploading Screenshot (1503).png…]()" alt="Homepage" width="500" />
 
 
 Features :-
