@@ -34,10 +34,6 @@ Connect-Flash (For flash messages),
 Bcrypt (For password hashing).
 
 
-
-<img src="C:\Users\Dheeraj Rawandhe\Pictures\Screenshots" alt="Homepage" width="500" />
-
-
 Features :-
 - User Registration and Login
 - Secure Passwords with Bcrypt
